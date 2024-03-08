@@ -8,9 +8,17 @@ import pandas as pd
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
+from datetime import datetime
 
 #import seaborn as sns
 
+def get_datetime_str():
+    # datetime object containing current date and time
+    now = datetime.now()
+    # ddmmYY-H_M
+    dt_string = now.strftime("%d%m%Y-%H_%M")
+    return dt_string
+    
 
 def show_images(images: list, labels: list[str]=None, n_cols: int=3):
     """
@@ -79,3 +87,4 @@ def get_outputs(model, dataloader, device) -> list():
     model.train(was_in_training)
     
     return outputs
+

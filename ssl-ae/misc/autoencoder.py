@@ -2,6 +2,7 @@ import torch
 from tqdm import tqdm
 from IPython.display import clear_output
 import random
+from misc.utils import get_outputs
 
 
 class MNIST_ConvEncoder(torch.nn.Module):
@@ -327,11 +328,12 @@ def evaluate_model(model, dataloader, loss, device) -> float:
 def train_autoencoder(
     autoencoder, 
     train_dataloader, 
-    test_dataloader, 
+    test_dataloader,
     autoencoder_loss,
     autoencoder_opt,
     device, 
     n_epochs: int=10, 
+    train_dataloader_nonshuffle=None,
     callback: callable=None, ) -> dict():
 
     
@@ -340,12 +342,15 @@ def train_autoencoder(
         "test_loss" : [],
     }
     
-    for epoch in range(1, n_epochs + 1):
+    if train_dataloader_nonshuffle is not None:
+        bn_logits = []
+    
+    for epoch in tqdm(range(1, n_epochs + 1)):
         print(f"Epoch №{epoch}")
         
         sum_loss = 0.0
         total_samples = 0
-        for index, batch in tqdm(enumerate(train_dataloader)):
+        for index, batch in (enumerate(train_dataloader)):
             x, y = batch
             batch_size = x.shape[0]
             
@@ -357,8 +362,12 @@ def train_autoencoder(
             
             sum_loss += _loss.item() * len(batch)
             total_samples += len(batch)
-            
+        
         autoencoder_metrics["train_loss"].append(sum_loss / total_samples)
+        
+        # calculating sample-wise metrics
+        if train_dataloader_nonshuffle is not None:
+            bn_logits.append(get_outputs(autoencoder.encoder, train_dataloader_nonshuffle, device).numpy())
         
         #train_loss = evaluate_model(autoencoder, train_dataloader, autoencoder_loss, device)
         #autoencoder_metrics["train_loss"].append(train_loss)
@@ -367,5 +376,8 @@ def train_autoencoder(
         
         if not (callback is None):
             callback(autoencoder, autoencoder_metrics)
-        
-    return autoencoder_metrics
+            
+    if train_dataloader_nonshuffle is not None:
+        return {"metrics": autoencoder_metrics, "bn_logits": bn_logits}
+    else:
+        return {"metrics": autoencoder_metrics}
