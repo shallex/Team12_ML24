@@ -3,6 +3,7 @@ from tqdm import tqdm
 from IPython.display import clear_output
 import random
 from misc.utils import get_outputs
+import numpy as np
 
 
 class MNIST_ConvEncoder(torch.nn.Module):
@@ -323,6 +324,31 @@ def evaluate_model(model, dataloader, loss, device) -> float:
     
     return avg_loss
 
+def evaluate_model_samplewise(model, dataloader, loss, device) -> float:
+    # Exit training mode.
+    was_in_training = model.training
+    model.eval()
+    
+    out_list = []
+  
+    with torch.no_grad():
+        avg_loss = 0.0
+        total_samples = 0
+        for batch in dataloader:
+            x, y = batch
+            batch_size = x.shape[0]
+            
+            y_pred = model(x.to(device))
+            _loss = loss(y_pred, y.to(device))
+            _loss = torch.mean(_loss, dim=list(range( len(_loss.shape) ))[1:])
+            out_list.append(_loss.cpu().numpy())
+
+        
+    # Return to the original mode.
+    model.train(was_in_training)
+    
+    return np.hstack(out_list)
+
 
 
 def train_autoencoder(
@@ -334,6 +360,7 @@ def train_autoencoder(
     device, 
     n_epochs: int=10, 
     train_dataloader_nonshuffle=None,
+    loss_samplewise=None,
     callback: callable=None, ) -> dict():
 
     
@@ -342,8 +369,15 @@ def train_autoencoder(
         "test_loss" : [],
     }
     
+    samplewise_metrics = {}
+    
+    
     if train_dataloader_nonshuffle is not None:
         bn_logits = []
+        
+        # samplewise metrics
+        if loss_samplewise is not None:
+            samplewise_metrics['samplewise_loss'] = []
     
     for epoch in tqdm(range(1, n_epochs + 1)):
         print(f"Epoch №{epoch}")
@@ -368,6 +402,11 @@ def train_autoencoder(
         # calculating sample-wise metrics
         if train_dataloader_nonshuffle is not None:
             bn_logits.append(get_outputs(autoencoder.encoder, train_dataloader_nonshuffle, device).numpy())
+            
+            # Samplewise loss
+            if loss_samplewise is not None:
+                samplewise_metrics['samplewise_loss'].append(evaluate_model_samplewise(autoencoder, train_dataloader_nonshuffle, loss_samplewise, device))
+            
         
         #train_loss = evaluate_model(autoencoder, train_dataloader, autoencoder_loss, device)
         #autoencoder_metrics["train_loss"].append(train_loss)
@@ -378,6 +417,6 @@ def train_autoencoder(
             callback(autoencoder, autoencoder_metrics)
             
     if train_dataloader_nonshuffle is not None:
-        return {"metrics": autoencoder_metrics, "bn_logits": bn_logits}
+        return {"metrics": autoencoder_metrics, "bn_logits": bn_logits, "samplewise_metrics": samplewise_metrics}
     else:
         return {"metrics": autoencoder_metrics}
