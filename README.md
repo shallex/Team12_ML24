@@ -17,3 +17,7 @@ Large datasets often contain instances that do not equally contribute to the lea
 ## Results
 
 All results you can find in appropreate folders and notebooks.
+
+### AutoEncoder
+
+![alt text](https://github.com/shallex/Team12_ML24/blob/main/images/ae-training.png?raw=true)
