@@ -41,3 +41,37 @@ Distribution:
 Right tail:
 
 ![alt text](https://github.com/shallex/Team12_ML24/blob/main/images/0.999_percentile.png?raw=true)
+
+#### Artificial label
+
+Applied label "1" to mixed images
+
+**SRCC of Non-supervised metrics with the artificial label**
+
+- Modest correlation with the artificial target of non-supervised metrics.
+- Entropy prevails probably because distorted images, indeed, are less “certain”.
+- More complicated metrics yield better results.
+
+SRCC with label:
+
+| Non-supervised metric | SRCC |
+| --- | --- |
+| H_mean_from_0 | 0.2524 |
+| LID_mean_from_10 | 0.2403 |
+| H_mean_from_400 | 0.2298 |
+| H_last | 0.2285 |
+| LID_var_from_10 | 0.2124 |
+
+**SRCC of Loss based metrics with the artificial label**
+
+Loss based metrics exhibit greater correlation with the artificial target.
+
+SRCC with label:
+
+| loss metric | SRCC |
+| --- | --- |
+| loss_last | 0.3826 |
+| loss_mean_from_50 | 0.3801 |
+| loss_mean_from_20 | 0.3793 |
+| loss_mean_from_0 | 0.3785 |
+| loss_diff_last_20 | 0.3067 |
