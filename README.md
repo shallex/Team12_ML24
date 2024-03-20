@@ -1,6 +1,4 @@
-# Team12_ML24
-
-Hard and Rare samples estimation with NN based models
+# Hard and Rare samples estimation with NN based models (Team-12, ML-24)
 
 ## Table of Contents
 - [Introduction](#introduction)
