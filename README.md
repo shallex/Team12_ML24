@@ -18,6 +18,26 @@ Large datasets often contain instances that do not equally contribute to the lea
 
 All results you can find in appropreate folders and notebooks.
 
+### SSFT
+
+Ramazan part
+
 ### AutoEncoder
 
+Mix 3000 images, example:
+
+![alt text](https://github.com/shallex/Team12_ML24/blob/main/images/mixed_image.png?raw=true)
+
+Training process:
+
 ![alt text](https://github.com/shallex/Team12_ML24/blob/main/images/ae-training.png?raw=true)
+
+#### Metric - sum loss from 1 to 100 epoch
+
+Distribution:
+
+![alt text](https://github.com/shallex/Team12_ML24/blob/main/images/dist_sum_loss.png?raw=true)
+
+Right tail:
+
+![alt text](https://github.com/shallex/Team12_ML24/blob/main/images/0.999_percentile.png?raw=true)
