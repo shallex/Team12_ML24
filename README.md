@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [Approaches](#approaches)
 - [Results](#results)
+- [Reproduction](#reproduction)
 
 ## Introduction
 
@@ -75,3 +76,11 @@ SRCC with label:
 | loss_mean_from_20 | 0.3793 |
 | loss_mean_from_0 | 0.3785 |
 | loss_diff_last_20 | 0.3067 |
+
+## Reproduction
+
+- To train autoencoder and get bottleneck embeddings with samplewise loss values - run `ae-reconstruction-L1.ipynb`.
+- To compute non-supervised and loss based metrics and plot histograms, images from them - run `ae-analysis.ipynb`. (The full run takes around hour)
+- To get correlations with artificial label and SSFT metrics - run `ssl-ae/ae-correlations.ipynb`.
+
+
