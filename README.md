@@ -79,8 +79,8 @@ SRCC with label:
 
 ## Reproduction
 
-- To train autoencoder and get bottleneck embeddings with samplewise loss values - run `ae-reconstruction-L1.ipynb`.
-- To compute non-supervised and loss based metrics and plot histograms, images from them - run `ae-analysis.ipynb`. (The full run takes around hour)
+- To train autoencoder and get bottleneck embeddings with samplewise loss values - run `ssl-ae/ae-reconstruction-L1.ipynb`.
+- To compute non-supervised and loss based metrics and plot histograms, images from them - run `ssl-ae/ae-analysis.ipynb`. (The full run takes around hour)
 - To get correlations with artificial label and SSFT metrics - run `ssl-ae/ae-correlations.ipynb`.
 
 
