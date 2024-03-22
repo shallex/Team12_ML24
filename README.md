@@ -21,7 +21,25 @@ All results you can find in appropreate folders and notebooks.
 
 ### SSFT
 
-Ramazan part
+* Network with lower number of parameters (0.3M vs 3M) tends to get decent SSFT metrics even without LR scheduling:
+
+<img src="https://github.com/shallex/Team12_ML24/blob/main/images/ssft_supervised_cnn_300k.png?raw=true" alt="" width="70%"/>
+
+* Visualization of samples taken from different clusters:
+
+<img src="https://github.com/shallex/Team12_ML24/blob/main/images/ssft_supervised_cnn_300k_visualised.png?raw=true" width="70%" />
+
+* In AutoEncoder scenario, we can look at learnt samples as samples with SSIM threshold higher than a fixed threshold (in our case it's 0.15):
+
+<img src="https://github.com/shallex/Team12_ML24/blob/main/images/ae_ssim_before_after_training.png?raw=true" width="70%" />
+
+* However, during second split training, SSIM on the samples from the first split is growing. Meaning that AE reconstruction task tends to generalize rather than overfit to the samples:
+
+ <img src="https://github.com/shallex/Team12_ML24/blob/main/images/ssft_autoencoder.png?raw=true" width="70%" >
+
+* Self and cross correlations are a bad metrics to separate a learnt and not yet learnt samples for the contrastive scenario in BarlowTwins:
+
+<img src="https://github.com/shallex/Team12_ML24/blob/main/images/ssft_barlowtwins_correlations.png?raw=true" width="100%" />
 
 ### AutoEncoder
 
