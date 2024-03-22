@@ -120,7 +120,7 @@ Non-supervised metrics - Learning time:
 Loss based metrics:
 
 | loss metric | SRCC Forgetting time| SRCC Learning time |
-| --- | --- |
+| --- | --- | --- |
 | loss_last | 0.0643 | 0.0753 | 
 | loss_mean_from_50 | 0.0605 | 0.0734 |
 | loss_mean_from_20 | 0.0594 | 0.0723 | 
