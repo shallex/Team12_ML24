@@ -63,15 +63,15 @@ Right tail:
 
 #### Artificial label
 
-Applied label "1" to mixed images
+Applied label "1" to mixture of images. 10% of MNIST train images were summed and normalized to have 0 mean and 1 std. Normalization prevents AE from separating the majority of latent representations of distorted images into a distinct cluster, increasing correlation of metrics.
 
-**SRCC of Non-supervised metrics with the artificial label**
+**SRCC of metrics with the artificial label**
 
 - Modest correlation with the artificial target of non-supervised metrics.
-- Entropy prevails probably because distorted images, indeed, are less “certain”.
-- More complicated metrics yield better results.
+  - More complicated metrics like LID and Entropy yield better results.
+- Loss based metrics exhibit greater correlation with the artificial target.
 
-SRCC with label:
+Non-supervised metrics:
 
 | Non-supervised metric | SRCC |
 | --- | --- |
@@ -81,11 +81,43 @@ SRCC with label:
 | H_last | 0.2285 |
 | LID_var_from_10 | 0.2124 |
 
-**SRCC of Loss based metrics with the artificial label**
+Loss based metrics:
 
-Loss based metrics exhibit greater correlation with the artificial target.
+| loss metric | SRCC |
+| --- | --- |
+| loss_last | 0.3826 |
+| loss_mean_from_50 | 0.3801 |
+| loss_mean_from_20 | 0.3793 |
+| loss_mean_from_0 | 0.3785 |
+| loss_diff_last_20 | 0.3067 |
 
-SRCC with label:
+#### SSFT metrics - learning and forgetting times
+
+**SRCC of metrics with the artificial label**
+
+- Small correlation (< 8%) with the SRCC metrics of non-supervised and loss based metrics.
+  - Again, more complicated metrics like LID and SIL score yield better results.
+- Loss based metrics exhibit smaller correlation with the SSFT metrics.
+
+Non-supervised metrics - Forgetting time:
+| Non-supervised metric | SRCC |
+| --- | --- |
+| sil_score__mean_from0 | 0.0791 |
+| sil_score__last | 0.0752 |
+| LID__mean_from_10 | 0.0746 |
+| LID__std_from_10 | 0.0667 |
+| LID__var_from_10 | 0.0667 |
+
+Non-supervised metrics - Learning time:
+| Non-supervised metric | SRCC |
+| --- | --- |
+| sil_score__mean_from0 | 0.1119 |
+| sil_score__last | 0.1065 |
+| LID__mean_from_10 | 0.0578 |
+| sil_score__std_from_10 | 0.0510 |
+| LID__last | 0.0501 |
+
+Loss based metrics:
 
 | loss metric | SRCC |
 | --- | --- |
