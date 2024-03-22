@@ -109,7 +109,7 @@ Non-supervised metrics - Forgetting time:
 | LID__var_from_10 | 0.0667 |
 
 Non-supervised metrics - Learning time:
-| Non-supervised metric | SRCC |
+| Non-supervised metric | SRCC Forgetting time|
 | --- | --- |
 | sil_score__mean_from0 | 0.1119 |
 | sil_score__last | 0.1065 |
@@ -119,13 +119,13 @@ Non-supervised metrics - Learning time:
 
 Loss based metrics:
 
-| loss metric | SRCC |
+| loss metric | SRCC Forgetting time| SRCC Learning time |
 | --- | --- |
-| loss_last | 0.3826 |
-| loss_mean_from_50 | 0.3801 |
-| loss_mean_from_20 | 0.3793 |
-| loss_mean_from_0 | 0.3785 |
-| loss_diff_last_20 | 0.3067 |
+| loss_last | 0.0643 | 0.0753 | 
+| loss_mean_from_50 | 0.0605 | 0.0734 |
+| loss_mean_from_20 | 0.0594 | 0.0723 | 
+| loss_mean_from_0 | 0.0570 | 0.0691 | 
+| loss_diff_last_0 | 0.0450 | 0.0456 |
 
 ## Reproduction
 
