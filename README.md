@@ -100,7 +100,7 @@ Loss based metrics:
 - Loss based metrics exhibit smaller correlation with the SSFT metrics.
 
 Non-supervised metrics - Forgetting time:
-| Non-supervised metric | SRCC |
+| Non-supervised metric | SRCC Forgetting time |
 | --- | --- |
 | sil_score__mean_from0 | 0.0791 |
 | sil_score__last | 0.0752 |
@@ -109,7 +109,7 @@ Non-supervised metrics - Forgetting time:
 | LID__var_from_10 | 0.0667 |
 
 Non-supervised metrics - Learning time:
-| Non-supervised metric | SRCC Forgetting time|
+| Non-supervised metric | SRCC Learning time|
 | --- | --- |
 | sil_score__mean_from0 | 0.1119 |
 | sil_score__last | 0.1065 |
